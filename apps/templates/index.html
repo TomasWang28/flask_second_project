@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% import 'includes/_marcos.html' as mc %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+
+    <div class="page-header">
+        <div class="container">
+            <h1>
+                {{ self.title() }}
+            </h1>
+        </div>
+
+    </div>
+
+
+    <div class="container">
+        {#使用刚刚定义的宏#}
+        {{ mc.input('username') }}
+        {{ mc.input('password',type='password') }}
+    </div>
+
+
+{% endblock content %}
+
+{#scoped为非封闭对象#}
+{% block footer %}
+    <hr>
+    {{ super() }}
+{% endblock %}

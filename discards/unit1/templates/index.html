@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% import 'includes/_marcos.html' as mc %}
+
+{% block title %}{{ title|safe }}{% endblock %}
+{% block content %}
+
+{#{% autoescape false %}#}
+{#{% endautoescape %}#}
+{#{{ title|safe }}#}
+{#{{ body|md|safe }}#}
+{#{{ read_md('sample.md')|md|safe}}#}
+
+{% set links=[
+        ('Home',url_for('.index')),
+        ('Webs',url_for('.webs')),
+        ('Server',url_for('.server')),
+        ('Devops',url_for('.devops')),
+] %}
+
+<nav>
+    {% for label,link in links %}
+        {% if not loop.first %}|{% endif %}
+        <a href="{% if link is current_link %} #
+        {% else %}
+        {{ link }}
+        {% endif %}">
+            {{ label }}</a>
+    {% endfor %}
+</nav>
+    <h1>{{ self.title() }}</h1>
+
+    {#使用刚刚定义的宏#}
+    {{ mc.input('username') }}
+    {{ mc.input('password',type='password') }}
+
+
+{% endblock content %}
+
+{#scoped为非封闭对象#}
+{% block footer %}
+    <hr>
+    {{ super() }}
+{% endblock %}
